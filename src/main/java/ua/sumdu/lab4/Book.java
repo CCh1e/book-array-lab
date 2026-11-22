@@ -1,5 +1,7 @@
 package ua.sumdu.lab4;
 
+import java.util.Objects;
+
 public class Book {
     private String title;
     private String author;
@@ -53,5 +55,32 @@ public class Book {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Book{title='%s', author='%s', year=%d, pages=%d, price=%.2f}",
+                title, author, year, pages, price);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Book book = (Book) o;
+        return year == book.year
+                && pages == book.pages
+                && Double.compare(price, book.price) == 0
+                && Objects.equals(title, book.title)
+                && Objects.equals(author, book.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, year, pages, price);
     }
 }
